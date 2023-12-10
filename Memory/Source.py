@@ -62,14 +62,15 @@ def simulate_cache(S, L, cache_access, file_path, output_text):
         miss_ratio = 1 - hit_ratio
         amat = hit_ratio * hit_penalty + miss_ratio * miss_penalty
         output += f"Accessing {address.hex}\n"
-        output += f"{'Index':<8}{'Tag':<8} | {'Data':<8}\n"
+        output += f"{'Index':<8} | {'Tag':<10} | {'Data':<8}\n"
         for cache_line in cache:
             if cache_line.valid:
-                output += f"{cache_line.index:<8}{cache_line.tag:<8} | {cache_line.data:<8}\n"
+                output += f"{cache_line.index:<8} | {cache_line.tag:<8} | {cache_line.data:<8}\n"
         output += f"Total Number of accesses: {accesses}\n"
         output += f"Hits ratio: {hit_ratio * 100:.2f}%\n"
         output += f"Misses ratio: {miss_ratio * 100:.2f}%\n"
-        output += f"AMAT: {amat:.2f} cycles\n\n"
+        output += f"AMAT: {amat:.2f} cycles\n"
+        output+= f"{'-'*30}\n"
         output_text.insert(tk.END, output)
 
 def start_simulation(entries, output_text):
